@@ -1,13 +1,15 @@
 <template>
     <v-footer 
-    color="pink darken-3"
+    color="cyan lighten-2"
     dense
-    dark>
+    dark
+    class="footer">
         <v-col
         class="text-center"
         cols="12"
-        >
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        ><v-btn icon><v-icon class="icon">mdi-facebook</v-icon></v-btn>
+        <v-btn icon><v-icon class="icon">mdi-instagram</v-icon></v-btn>
+        <v-btn icon><v-icon class="icon">mdi-twitter</v-icon></v-btn>
         </v-col>
     </v-footer>
 </template>
@@ -31,5 +33,13 @@ export default {
 </script>
 
 <style scoped>
-    
+    .icon{
+        margin:0px 5px;
+        padding-top: 0; /* Ajusta el espacio superior */
+        padding-bottom:0; /* Ajusta el espacio inferior */
+    }
+    .footer{
+        padding-top: 0; /* Ajusta el espacio superior */
+        padding-bottom:0; /* Ajusta el espacio inferior */
+    }
 </style>

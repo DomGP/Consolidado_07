@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="body">
     <nav-view/>
 
     <v-main>
@@ -33,5 +33,10 @@ export default {
 </script>
 
 <style scoped>
-  
+  /* .body{
+    background:linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://images6.alphacoders.com/822/822450.jpg');
+    background-size:cover;
+        background-attachment: fixed;
+        height: 100%;
+  } */
 </style>

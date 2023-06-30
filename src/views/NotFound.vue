@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h2>Pagina no Encontrada</h2>
+    <div class="notfound">
+        <h2></h2>
     </div>
 </template>
 
@@ -23,5 +23,10 @@ export default {
 </script>
 
 <style scoped>
-    
+    .notfound{
+        background-image:url('@/assets/notfound.png') ;
+        background-size:cover;
+        background-attachment: fixed;
+        height: 100%;
+    }
 </style>

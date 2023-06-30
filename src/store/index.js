@@ -110,15 +110,17 @@ export default new Vuex.Store({
       },
       countCursosTerminados: state => {
         return state.cursos.filter(curso => !curso.completado).length;
-      }
+      },
+      getCursoById: (state) => (id) => {    
+        return state.cursos.find(curso => curso.id == id)  }
   },
   mutations: {
     ADD_CLASS:(state,curso)=>{
       curso.id = Math.floor(Math.random()*1000)
       state.cursos.push(curso)
     },
-    REMOVE_CLASS:(state, id)=>{
-      let index = state.cursos.findIndex((prod)=>prod.id==id)
+    REMOVE_CLASS:(state, nombre)=>{
+      let index = state.cursos.findIndex((curso)=>curso.nombre==nombre)
       state.cursos.splice(index,1)
     },
   },
@@ -126,8 +128,8 @@ export default new Vuex.Store({
     addClass:({commit},curso)=>{
       commit('ADD_CLASS',curso)
     },
-    removeClass:({commit},id)=>{
-      commit('REMOVE_CLASS',id)
+    removeClass:({commit},nombre)=>{
+      commit('REMOVE_CLASS',nombre)
     }
   },
   modules: {

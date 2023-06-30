@@ -1,10 +1,11 @@
 <template>
   <v-container>
-    <h1>Lista de Curso</h1>
+    <h1 class="text-decoration-underline">Lista de Cursos</h1>
     <v-row justify="center">
       <v-card 
       class="card"
       width="400" 
+      elevation="20"
       v-for="curso in cursos"
       :key="curso.id">
         <v-img
@@ -72,7 +73,7 @@
                 <div class="font-weight-normal">
                   <strong>Descrpción: </strong>
                 </div>
-                <div>{{curso.descripcion}}</div>
+                <div class="desc">{{curso.descripcion}}</div>
               </div>
               
             </v-timeline-item>
@@ -110,13 +111,21 @@ export default {
   }
   h1{
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    font-size: 40px;
+    color:black
+    /* color:white; */
   }
   .card{
     margin:30px 30px;
-  }
+    border-radius: 30px;
+    /* background: lightgrey; */
+    }
   .img{
-    margin-top:30px;
+    margin-top:20px;
     
+  }
+  .desc{
+    text-align: justify;
   }
 </style>

@@ -19,9 +19,9 @@ const routes = [
     component: Administracion
   },
   {
-    path:'/edicion',
-    name:'edicion',
-    component:Edicion
+    path:'/administracion/:id',
+    component:Edicion,
+    props:true
   },
   {
     path:'*',

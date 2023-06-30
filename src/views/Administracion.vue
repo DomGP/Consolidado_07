@@ -1,14 +1,10 @@
 <template>
     <v-container>
-        <h1>Administración</h1>
+        <h1 class="text-decoration-underline">Administración</h1>
         <v-row justify="center">
             <v-col cols="12" sm="10">
-                <v-btn 
-                @click="showModal()"
-                class="btn"
-                color="light-blue darken-1"
-                dark>Agregar Curso</v-btn>
-                <v-simple-table>
+                <modal-comp @close='dialog=false' :dialog='dialog'/>
+                <v-simple-table class="table">
                     <template v-slot:default>
                     <thead>
                         <tr>
@@ -52,15 +48,15 @@
                         <td><div class="td-style">{{ curso.fecha_registro }}</div></td>
                         <td>
                             <v-btn icon color="amber darken-1"
-                            @click="$router.push('/edicion')"><v-icon>mdi-pencil</v-icon></v-btn>
+                            @click="redirect(curso.id)"><v-icon>mdi-pencil</v-icon></v-btn>
                             <v-btn icon color="red darken-2"
-                            @click="removeClass(cursos.id)"><v-icon>mdi-delete</v-icon></v-btn>
+                            @click="confirmDelete(curso)"><v-icon>mdi-delete</v-icon></v-btn>
+                            
                         </td>
-                        </tr>
+                        </tr>      
                     </tbody>
                     </template>
                 </v-simple-table>
-                <hr>
                 <br>
                 <div>
                     <v-alert
@@ -68,6 +64,7 @@
                         outlined
                         shaped
                         color="purple darken-1"
+                        class="alert"
                     >
                     <v-icon color="purple darken-1">mdi-account-multiple</v-icon>
                     Cantidad total de alumnos permitidos: <strong>{{countTotalCupos}}</strong> alumnos.</v-alert>
@@ -114,13 +111,14 @@
                 </div>
             </v-col>
         </v-row>
-        <modal-comp @close='dialog=false' :dialog='dialog'/>
+        <borrar-comp/>
     </v-container>
 </template>
 
 <script>
 import {mapState, mapGetters, mapActions} from 'vuex'
 import Modal from '@/components/nuevaClase/Modal.vue'
+import BorrarClase from '@/components/borrarClase/BorrarClase.vue'
 export default {
     name: 'adm-view',
     // props: {},
@@ -135,14 +133,19 @@ export default {
     },
     methods: {
         ...mapActions(['removeClass']),
-        showModal(){
-            this.dialog=true
+        confirmDelete(curso){
+            if(confirm('¿Estás seguro que deseas eliminar este curso?'))
+            this.removeClass(curso.nombre);
+        },
+        redirect(id){
+            console.log(id)
+            this.$router.push(`/administracion/${id}`)
         }
-
     },
     // watch: {},
     components: {
-        'modal-comp': Modal
+        'modal-comp': Modal,
+        'borrar-comp': BorrarClase
     },
     // mixins: [],
     // filters: {},
@@ -154,6 +157,9 @@ export default {
 <style scoped>
     h1{
         text-align: center;
+        margin-bottom: 10px;
+        font-size: 40px;
+        color:black;
     }
     .td-style{
         background: #00E676;
@@ -161,13 +167,16 @@ export default {
         text-align: center;
         padding: 5px 0;
         border-radius:60px ;
+        min-width: 60px;
+        max-width:90px;
     }
     .success-color {
         background: #40C4FF; /* Color para el caso 'si' */
         color:white;
         text-align: center;
         padding: 5px 0;
-        border-radius:60px ;
+        border-radius:60px;
+        max-width:40px;
     }
     .error-color {
         background: #BDBDBD; /* Color para el caso 'no' */
@@ -175,5 +184,12 @@ export default {
         text-align: center;
         padding: 5px 0;
         border-radius:60px ;
+        max-width:40px;
     }
+    .table{
+        border-radius: 10px;
+    }
+    /* .alert{
+        background-color:white ;
+    } */
 </style>

@@ -1,19 +1,30 @@
 <template>
     <div>
         <h1>Edición</h1>
-        <formEdicion-comp/>
+        <formEdicion-comp :curso='curso'/>
     </div>
 </template>
 
 <script>
 import FormEdicion from '@/components/editarClase/FormEdicion.vue'
+import {mapGetters} from 'vuex'
 export default {
     name: 'edicion-view',
-    // props: {},
+    props: {
+        id:{
+            type:String,
+            required:true
+        }
+    },
     data: function(){
         return {}
     },
-    // computed: {},
+    computed: {
+        ...mapGetters(['getCursoById']),
+        curso(){
+            return this.getCursoById(this.id)
+        }
+    },
     //methods: {}
     // watch: {},
     components: {
