@@ -32,12 +32,13 @@
                         <th class="text-left">
                             Acciones
                         </th>
+                        <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr
-                        v-for="curso in cursos"
-                        :key="curso.name"
+                        v-for="(curso,index) in cursos"
+                        :key="index"
                         >
                         <td>{{ curso.nombre }}</td>
                         <td>{{ curso.cupos }}</td>
@@ -49,9 +50,13 @@
                         <td>
                             <v-btn icon color="amber darken-1"
                             @click="redirect(curso.id)"><v-icon>mdi-pencil</v-icon></v-btn>
-                            <v-btn icon color="red darken-2"
-                            @click="confirmDelete(curso)"><v-icon>mdi-delete</v-icon></v-btn>
-                            
+        
+                            <v-btn 
+                            icon 
+                            color="red darken-2"
+                            @click="openDialog(index)">
+                            <v-icon>mdi-delete</v-icon>
+                            </v-btn>                       
                         </td>
                         </tr>      
                     </tbody>
@@ -111,7 +116,7 @@
                 </div>
             </v-col>
         </v-row>
-        <borrar-comp/>
+        <borrar-comp icon :dialog="dialog" :curso="deleteIndex" @close="dialog=false"/>
     </v-container>
 </template>
 
@@ -125,6 +130,7 @@ export default {
     data: function(){
         return {
             dialog:false,
+            deleteIndex:-1
         }
     },
     computed: {
@@ -133,13 +139,18 @@ export default {
     },
     methods: {
         ...mapActions(['removeClass']),
-        confirmDelete(curso){
+        /* confirmDelete(curso){
             if(confirm('¿Estás seguro que deseas eliminar este curso?'))
             this.removeClass(curso.nombre);
-        },
+        }, */
         redirect(id){
             console.log(id)
             this.$router.push(`/administracion/${id}`)
+        },
+        openDialog(index){
+            this.deleteIndex=index
+            this.dialog=true
+
         }
     },
     // watch: {},
@@ -189,7 +200,4 @@ export default {
     .table{
         border-radius: 10px;
     }
-    /* .alert{
-        background-color:white ;
-    } */
 </style>

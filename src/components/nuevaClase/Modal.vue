@@ -28,7 +28,7 @@
                     >
                         <v-text-field
                         v-model="nombre"
-                        :counter="20"
+                        :counter="50"
                         :rules="nameRules"
                         label="Nombre"
                         required
@@ -142,7 +142,7 @@ export default {
             inscritosError: '',
             nameRules: [
             (v) => !!v || 'Nombre es requerido',
-            (v) => (v && v.length <= 20) || 'Name must be less than 10 characters',
+            (v) => (v && v.length <= 50) || 'Name must be less than 10 characters',
             ],
             imgRules:[(v) => !!v || 'URL es requerida'],
             cuposRules:[(v) => !!v || 'Cupo es requerida',

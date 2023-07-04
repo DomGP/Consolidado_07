@@ -1,44 +1,73 @@
 <template>
-    <v-row justify="center">
+    <div class="text-center">
         <v-dialog
-            v-model="dialog"
-            persistent
-            max-width="290"
-            >
+        :value="dialog"
+        width="500"
+        >
+
         <v-card>
-            <v-card-title class="text-h5">
-            Borrar
+            <v-card-title class="text-h5 grey lighten-2">
+            Borrar Clase
+            {{curso}}
             </v-card-title>
-            <v-card-text>¿Estás seguro que desea eliminar la clase?</v-card-text>
+
+            <v-card-text>
+                <br>
+            ¿Está seguro que desea eliminar la clase?
+            </v-card-text>
+
+            <v-divider></v-divider>
+
             <v-card-actions>
             <v-spacer></v-spacer>
-
-            <v-btn color="red darken-2" text @click="cancelDelete">Cancelar</v-btn>
-            <v-btn color="green darken-1" text @click="confirmDelete">Aceptar</v-btn>
-    
+            <v-btn
+                color="success"
+                dark
+                @click="deleteClass"
+            >
+                Aceptar
+            </v-btn>
+            <v-btn
+                color="error"
+                dark
+                @click="$emit('close')"
+            >
+                Cancelar
+            </v-btn>
             </v-card-actions>
         </v-card>
         </v-dialog>
-    </v-row>
+    </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
     name: 'borrar-comp',
-    // props: {},
+    props: {
+        curso: {
+            type: Number,
+            required: true,
+    },
+        dialog:{
+            type: Boolean,
+            required: true
+        }
+    },
     data: function(){
         return {
-            dialog:false
+            /* dialog:false, */
+
         }
     },
     // computed: {},
     methods: {
-        cancelDelete: function() {
-            this.$emit("cancel");
-            },
-        confirmDelete: function() {
-            this.$emit("confirm");
-            }
+        ...mapActions(['removeClass']),
+
+        deleteClass() {
+        this.removeClass(this.curso);
+        this.$emit('close')
+    },
     }
     // watch: {},
     // components: {},

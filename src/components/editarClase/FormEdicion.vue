@@ -9,7 +9,7 @@
             >
                 <v-text-field
                 v-model="form.nombre"
-                :counter="20"
+                :counter="50"
                 :rules="nameRules"
                 label="Nombre"
                 required
@@ -130,7 +130,7 @@
         inscritosError2: '',
         nameRules: [
             (v) => !!v || 'Nombre es requerido',
-            (v) => (v && v.length <= 20) || 'Name must be less than 10 characters',
+            (v) => (v && v.length <= 50) || 'Name must be less than 50 characters',
             ],
         imgRules:[(v) => !!v || 'URL es requerida'],
         cuposRules:[(v) => !!v || 'Cupo es requerida',

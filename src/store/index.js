@@ -119,8 +119,9 @@ export default new Vuex.Store({
       curso.id = Math.floor(Math.random()*1000)
       state.cursos.push(curso)
     },
-    REMOVE_CLASS:(state, nombre)=>{
-      let index = state.cursos.findIndex((curso)=>curso.nombre==nombre)
+    REMOVE_CLASS:(state, index)=>{
+      /* let index = state.cursos.findIndex((curso)=>curso.nombre==nombre) */
+      console.log(index)
       state.cursos.splice(index,1)
     },
   },
@@ -128,8 +129,8 @@ export default new Vuex.Store({
     addClass:({commit},curso)=>{
       commit('ADD_CLASS',curso)
     },
-    removeClass:({commit},nombre)=>{
-      commit('REMOVE_CLASS',nombre)
+    removeClass:({commit},index)=>{
+      commit('REMOVE_CLASS',index)
     }
   },
   modules: {
